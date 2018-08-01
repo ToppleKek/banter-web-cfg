@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<script src="configGenerator.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <title>Banter Web Configuration</title>
+</head>
+<body onload="loadConfig()">
+    <p style="text-align: center">Blacklist</p>
+    <div style="text-align: center" id="blacklist">
+        <input type="checkbox" id="blacklistShowInfractions">Show infractions in modlog<br>
+        <input type="checkbox" id="blacklistIgnoreAdmins">Don't filter messages sent by administrators<br>
+        <br>
+    </div>
+    <div style="text-align: center">
+        <button onclick="generateConfig()">Generate Config String</button>
+    </div>
+    <p style="text-align: center" id="b64string">N/A</p>
+</body>
+</html>
