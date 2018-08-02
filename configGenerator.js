@@ -1,12 +1,19 @@
 function generateConfig() {
+  let blLevelRadio;
+  if (document.getElementById('blLevelLow').checked) blLevelRadio = 0;
+  else if (document.getElementById('blLevelMed').checked) blLevelRadio = 1;
+  else if (document.getElementById('blLevelHigh').checked) blLevelRadio = 2;
+  else blLevelRadio = 2;
+
   const configJSON = {
-    "blacklistShowInfractions": document.getElementById('blacklistShowInfractions').checked,
-    "blacklistIgnoreAdmins": document.getElementById('blacklistIgnoreAdmins').checked
+    "blShowInfractions": document.getElementById('blacklistShowInfractions').checked,
+    "blIgnoreAdmins": document.getElementById('blacklistIgnoreAdmins').checked,
+    "blLevel": blLevelRadio
   };
 
   const e = document.getElementById("b64string");
   const strJSON = JSON.stringify(configJSON);
-  e.innerHTML = btoa(strJSON);
+  e.innerHTML = `.!loadcfg ${btoa(strJSON)}`;
 }
 
 function loadConfig() {
@@ -15,9 +22,22 @@ function loadConfig() {
   if (b64) {
     try {
       const json = JSON.parse(atob(b64));
-      document.getElementById('blacklistShowInfractions').checked = json.blacklistShowInfractions;
-      document.getElementById('blacklistIgnoreAdmins').checked = json.blacklistIgnoreAdmins;
-      document.getElementById('b64string').innerHTML = b64;
+      document.getElementById('blacklistShowInfractions').checked = json.blShowInfractions;
+      document.getElementById('blacklistIgnoreAdmins').checked = json.blIgnoreAdmins;
+      switch (json.blLevel) {
+        case 0:
+          document.getElementById('blLevelLow').checked = true;
+          break;
+        case 1:
+          document.getElementById('blLevelMed').checked = true;
+          break;
+        case 2:
+          document.getElementById('blLevelHigh').checked = true;
+          break;
+        default:
+          document.getElementById('blLevelHigh').checked = true;
+      }
+      document.getElementById('b64string').innerHTML = `.!loadcfg ${b64}`;
     } catch (e) {
       alert(`Failed to load config from url: ${e}`);
     }

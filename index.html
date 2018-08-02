@@ -12,8 +12,19 @@
         <input type="checkbox" id="blacklistIgnoreAdmins">Don't filter messages sent by administrators<br>
         <br>
     </div>
+    <p style="text-align: center">Blacklist Strictness</p>
+    <div style="text-align: center" id="blacklistStrict">
+        <input type="radio" id="blLevelLow" name="blLevel" value="low">
+        <label for="blLevelLow">Low: Strip no characters, only check</label>
+        <br>
+        <input type="radio" id="blLevelMed" name="blLevel" value="med">
+        <label for="blLevelMed">Medium: Replace accented characters with normal letters and remove markdown characters</label>
+        <br>
+        <input type="radio" id="blLevelHigh" name="blLevel" value="high">
+        <label for="blLevelHigh">High: Medium, plus removing whitespace</label>
+    </div>
     <div style="text-align: center">
-        <button onclick="generateConfig()">Generate Config String</button>
+        <button onclick="generateConfig()">Generate Config Command</button>
     </div>
     <p style="text-align: center" id="b64string">N/A</p>
 </body>
